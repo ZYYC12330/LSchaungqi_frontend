@@ -107,36 +107,46 @@ export async function runWorkflow(fileId: string): Promise<WorkflowResponse> {
       throw new APIError(`工作流执行失败: ${response.statusText}`, response.status)
     }
 
-    const rawData: any = await response.json()
+    const rawData: WorkflowAPIResponse = await response.json()
 
-    // 支持多种数据格式：to_chatbot 或 to_web
-    const outputData = rawData.output?.to_chatbot || rawData.output?.to_web || rawData.to_chatbot
+    // 支持多种数据格式：
+    // 1. 新格式：直接在根级别的 to_chatbot
+    // 2. 旧格式：output.to_chatbot 或 output.to_web
+    const outputData = rawData.to_chatbot || rawData.output?.to_chatbot || rawData.output?.to_web
 
     // 验证返回数据结构
-    if (!outputData?.sim && !outputData?.simulator) {
-      throw new APIError("工作流响应数据格式错误", response.status, rawData)
+    if (!outputData) {
+      throw new APIError("工作流响应数据格式错误：缺少输出数据", response.status, rawData)
+    }
+
+    if (!outputData.sim && !outputData.simulator) {
+      throw new APIError("工作流响应数据格式错误：缺少仿真机数据", response.status, rawData)
     }
 
     // 处理仿真机数据（支持 sim 和 simulator 两种格式）
     const simulatorData = outputData.sim || outputData.simulator
 
-    // 处理板卡数据
+    // 处理板卡数据（支持 card 和 cards 两种格式）
     const cardData = outputData.card || outputData.cards
+
+    if (!cardData) {
+      throw new APIError("工作流响应数据格式错误：缺少板卡数据", response.status, rawData)
+    }
 
     // 将嵌套的响应数据转换为扁平结构
     const data: WorkflowResponse = {
       simulator: {
         result_id: {
           id: simulatorData.id,
-          details: simulatorData.details,
-          total_score: simulatorData.total_score,
+          details: simulatorData.details || [],
+          total_score: simulatorData.total_score || 0,
         },
       },
       cards: {
         Body: {
-          success: cardData.success,
-          message: cardData.message,
-          total_cards: cardData.total_cards,
+          success: cardData.success !== false,
+          message: cardData.message || "",
+          total_cards: cardData.total_cards || 0,
           requirements_summary: cardData.requirements_summary || [],
           feasibility_checks: cardData.feasibility_checks || [],
           optimized_solution: cardData.optimized_solution || [],

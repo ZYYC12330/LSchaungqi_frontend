@@ -46,6 +46,7 @@ export interface MatchedBoard {
   description: string
   match_degree: number
   original: string
+  model?: string // 产品型号字段（后端提供）
 }
 
 // 所有板卡信息
@@ -93,23 +94,81 @@ export interface CardResult {
   all_cards?: AllCardChannel[]
 }
 
-// Workflow API 原始响应（包含嵌套结构）
+// 原始仿真机信息
+export interface RawSimulator {
+  id: string
+  category: string
+  type: string
+  model: string
+  brief_description: string
+  detailed_description: string
+  manufacturer: string
+  price_cny: number
+  series: string
+  cpu: string
+  hard_disk: string
+  memory: string
+  slots: string
+}
+
+// 未满足的需求
+export interface UnsatisfiedRequirement {
+  original: string
+  reason: string
+  Channels_type: string
+}
+
+// 新格式 to_chatbot 输出数据
+export interface ToChatbotOutput {
+  sim: {
+    id: string
+    details: SimulatorDetail[]
+    total_score: number
+  }
+  card: {
+    success: boolean
+    message: string
+    total_cards: number
+    requirements_summary: RequirementSummary[]
+    feasibility_checks: FeasibilityCheck[]
+    optimized_solution: OptimizedCard[]
+    total_cost: number
+    channel_satisfaction: ChannelSatisfaction[]
+    unsatisfied_requirements?: Array<{
+      channel_type: string
+      required: number
+      available: number
+    }>
+  }
+  all_cards: AllCardChannel[]
+  raw_sim: RawSimulator[]
+  unsatisfied: UnsatisfiedRequirement[]
+}
+
+// 旧格式 to_web 输出数据
+export interface ToWebOutput {
+  simulator: SimulatorResult
+  cards: {
+    success: boolean
+    message: string
+    total_cards: number
+    requirements_summary: RequirementSummary[]
+    feasibility_checks: FeasibilityCheck[]
+    optimized_solution: OptimizedCard[]
+    total_cost: number
+    channel_satisfaction: ChannelSatisfaction[]
+  }
+}
+
+// Workflow API 原始响应（兼容新旧格式）
 export interface WorkflowAPIResponse {
-  status: string
-  output: {
-    to_web: {
-      simulator: SimulatorResult
-      cards: {
-        success: boolean
-        message: string
-        total_cards: number
-        requirements_summary: RequirementSummary[]
-        feasibility_checks: FeasibilityCheck[]
-        optimized_solution: OptimizedCard[]
-        total_cost: number
-        channel_satisfaction: ChannelSatisfaction[]
-      }
-    }
+  status?: string
+  // 新格式：直接在根级别
+  to_chatbot?: ToChatbotOutput
+  // 旧格式：嵌套在 output 下
+  output?: {
+    to_web?: ToWebOutput
+    to_chatbot?: ToChatbotOutput
   }
 }
 
@@ -125,6 +184,8 @@ export interface AnalysisResult {
   cards: CardResult
   timestamp: number
   simulatorName?: string
+  rawSimulator?: RawSimulator[]  // 原始仿真机信息
+  unsatisfied?: UnsatisfiedRequirement[]  // 未满足的需求
 }
 
 // 通道类型名称映射

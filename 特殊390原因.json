@@ -1,0 +1,84 @@
+    [
+    {
+      "id": "cc9f1c93-96d6-48ac-94e1-bf9b0f4d50f9",
+      "category": "多功能采集",
+      "type": "多功能采集卡（DA通道已经调整为4路）板卡",
+      "brief_description": "12路PWM输出通道，每路可独立控制，10Hz~1MHz，可以两路一组构成互补输出关系（死区可设置）；\n2路增量式正交编码器采集通道，32位计数器，可直接输出角度和角速度；\n6路差分信号输入通道，可配置为霍尔编码器采集；\n8路并行A/D，16位分辨率，±10V，采样率100kHz；\n4路DA，16位分辨率，±10V；\n8路DI，8路DO，TTL电平；\n2路5V供电输出，单路最大电流输出200mA；\n2路数字I/O线（5V CMOS/TTL），可配置为脉冲采集通道，可采集脉冲频率和占空比，32位计数器。",
+      "price_cny": 90,
+      "quantity": 1,
+      "total_amount_cny": 90,
+      "model": "Links-IPC-DAQ-08"
+    },
+
+          {
+            "id": "c3418033-9eba-4c25-8a86-5ae19a61f8dd",
+            "category": "通信协议",
+            "type": "CAN接口板卡",
+            "brief_description": "CAN总线接口，2个高速通道，16Mhz控制速率， 1Mbps传输率，20V隔离 ；",
+            "price_cny": 60,
+            "quantity": 1,
+            "total_amount_cny": 60,
+            "model": "Links-IPC-CAN"
+          },
+          {
+            "id": "efa83220-6850-4792-a434-c38dbd462a46",
+            "category": "通信协议",
+            "type": "CAN/CAN-FD接口板卡",
+            "brief_description": "4通道CAN/CAN-FD卡，DB37接口。\nCAN 通讯波特率在 40Kbps~1Mbps 之间任意可编程；\nCANFD 波特率在 1Mbps~5Mbps 之间任意可编程；",
+            "price_cny": 80,
+            "quantity": 1,
+            "total_amount_cny": 80,
+            "model": "Links-IPC-CANFD-04"
+          },
+          {
+            "id": "263362c6-ee7b-49f8-929d-4f029871501b",
+            "category": "通信协议",
+            "type": "CAN/CAN-FD接口板卡",
+            "brief_description": "2通道CAN/CAN-FD卡，DB9接口。\nCAN 通讯波特率在 40Kbps~1Mbps 之间任意可编程；\nCANFD 波特率在 1Mbps~5Mbps 之间任意可编程；\n",
+            "price_cny": 60,
+            "quantity": 1,
+            "total_amount_cny": 60,
+            "model": "Links-IPC-CANFD-02"
+          },
+          {
+            "id": "83af9f28-0743-457e-9642-f78ae6a48a21",
+            "category": "通信协议",
+            "type": "CAN接口板卡",
+            "brief_description": "CAN总线接口，10个高速通道，波特率10Kbps~1Mbps，支持CAN通讯的各种帧格式:标准数据帧、标准遥传帧、扩展数据帧、扩展远程帧",
+            "price_cny": 250,
+            "quantity": 1,
+            "total_amount_cny": 250,
+            "model": "Links-C3U-CAN-10"
+          },
+          {
+            "id": "25110b3a-2d29-46c6-a287-edb9e50f60ee",
+            "category": "通信协议",
+            "type": "CAN接口板卡",
+            "brief_description": "CAN总线接口，2个高速通道，16Mhz控制速率， 1Mbps传输率，20V隔离",
+            "price_cny": 80,
+            "quantity": 1,
+            "total_amount_cny": 80,
+            "model": "Links-C3U-CAN"
+          },
+          {
+            "id": "257d14e0-dc9e-4d82-9483-790f21bd6421",
+            "category": "通信协议",
+            "type": "CAN接口板卡",
+            "brief_description": "CAN总线接口，4个高速通道，16Mhz控制速率， 1Mbps传输率，10V隔离，支持CAN2.0A/B协议",
+            "price_cny": 150,
+            "quantity": 1,
+            "total_amount_cny": 150,
+            "model": "Links-C3U-CAN-4"
+          }
+]
+
+
+    
+{
+          "original": "提供不少于8路DA，16位分辨率，±10V",
+          "category": "模拟量",
+          "type": "模拟量输出板卡",
+          "Channels_type": "analogOutputChannels",
+          "Channels_number": 8
+        }
+      

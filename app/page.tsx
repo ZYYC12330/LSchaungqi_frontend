@@ -61,7 +61,7 @@ export default function UploadPage() {
 
       setUploadProgress("正在提取技术需求...")
 
-      // 保存分析结果到 context
+      // 保存分析结果到 context（包含新增的 raw_sim 和 unsatisfied 数据）
       setAnalysisResult({
         simulator: result.simulator,
         cards: result.cards,

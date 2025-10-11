@@ -63,13 +63,14 @@ function ProductsContent() {
   const recommendedIds = new Set(optimizedSolution.map((card) => card.id))
 
   const products = matchedBoards.map((board) => ({
-    name: `板卡 ID: ${board.id.substring(0, 8)}...`,
+    name: board.model || `板卡 ID: ${board.id.substring(0, 8)}...`,
     matchRate: formatMatchRate(board.match_degree),
     price: `¥${board.price_cny}`,
     specs: board.reason,
     description: board.description,
     isRecommended: recommendedIds.has(board.id),
     id: board.id,
+    model: board.model,
   }))
 
   const getMatchColor = (rate: string) => {
@@ -103,7 +104,7 @@ function ProductsContent() {
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50">
-                  <TableHead className="font-bold">产品ID</TableHead>
+                  <TableHead className="font-bold">产品型号</TableHead>
                   <TableHead className="font-bold">匹配度</TableHead>
                   <TableHead className="font-bold">价格</TableHead>
                   <TableHead className="font-bold">匹配原因</TableHead>
@@ -113,8 +114,8 @@ function ProductsContent() {
               <TableBody>
                 {products.map((product) => (
                   <TableRow key={product.id} className={product.isRecommended ? "bg-green-50/50" : ""}>
-                    <TableCell className="font-mono text-primary font-semibold text-xs">
-                      {product.id}
+                    <TableCell className="font-mono text-primary font-semibold">
+                      {product.model || product.name}
                       {product.isRecommended && (
                         <Badge className="ml-2 bg-green-600 text-white text-xs">已选</Badge>
                       )}

@@ -73,31 +73,48 @@ export default function ResultsPage() {
   // 提取板卡结果
   const cardData = analysisResult.cards.Body
   const allCards = analysisResult.cards.all_cards || []
+  const optimizedSolution = cardData.optimized_solution || []
 
-  // 为每个优化方案的板卡找到对应的描述信息
-  const boardResults = cardData.optimized_solution.map((card) => {
-    // 查找该板卡在all_cards中的详细信息
-    let description = ""
-    let originalRequirement = ""
+  // 遍历all_cards，以客户原始需求为主键
+  const boardResults = allCards
+    .map((channelGroup) => {
+      const firstBoard = channelGroup.matched_board[0]
+      const isNotFound = firstBoard?.reason === "未找到相关功能板卡"
 
-    for (const channelGroup of allCards) {
-      const matchedCard = channelGroup.matched_board.find((b) => b.id === card.id)
-      if (matchedCard) {
-        description = matchedCard.description
-        originalRequirement = matchedCard.original
-        break
+      if (isNotFound) {
+        return {
+          requirement: firstBoard.original,
+          matchRate: "0%",
+          product: "/",
+          description: "",
+          price: "/",
+          suggestion: "未找到匹配板卡",
+          channelType: channelGroup.Channels_type,
+          isNotFound: true,
+        }
       }
-    }
 
-    return {
-      requirement: originalRequirement || card.model,
-      matchRate: "100%", // 优化方案默认100%匹配
-      product: card.model,
-      description: description,
-      price: `¥${card.unit_price}/块`,
-      suggestion: `建议采购${card.quantity}块`,
-    }
-  })
+      // 在 optimized_solution 中找对应的板卡
+      const optimizedCard = optimizedSolution.find((card) =>
+        channelGroup.matched_board.some((b) => b.id === card.id),
+      )
+
+      if (!optimizedCard) return null
+
+      const matchedBoard = channelGroup.matched_board.find((b) => b.id === optimizedCard.id)
+
+      return {
+        requirement: firstBoard.original,
+        matchRate: formatMatchRate(matchedBoard.match_degree),
+        product: matchedBoard.model || optimizedCard.model,
+        description: matchedBoard.description,
+        price: `¥${matchedBoard.price_cny}/块`,
+        suggestion: `建议采购${optimizedCard.quantity}块`,
+        channelType: channelGroup.Channels_type,
+        isNotFound: false,
+      }
+    })
+    .filter(Boolean)
 
   const handleRequirementClick = (requirement: string, channelType?: string) => {
     // 对于板卡，使用channel_type而不是requirement文本
@@ -137,7 +154,6 @@ export default function ResultsPage() {
                     <TableHead className="font-bold">客户原始需求</TableHead>
                     <TableHead className="font-bold">匹配度</TableHead>
                     <TableHead className="font-bold">选型产品</TableHead>
-                    <TableHead className="font-bold">单价</TableHead>
                     <TableHead className="font-bold">建议</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -155,10 +171,15 @@ export default function ResultsPage() {
                           <span className="font-mono text-primary cursor-help">{row.product}</span>
                         </ProductTooltip>
                       </TableCell>
-                      <TableCell className="font-semibold">{row.price}</TableCell>
                       <TableCell className="text-muted-foreground">{row.suggestion}</TableCell>
                     </TableRow>
                   ))}
+                  <TableRow className="bg-accent/10 font-bold">
+                    <TableCell colSpan={2}>总价</TableCell>
+                    <TableCell colSpan={2} className="text-lg">
+                      ¥80,000
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </div>
@@ -184,36 +205,36 @@ export default function ResultsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {boardResults.map((row, index) => {
-                    // 从requirement中找到对应的channel_type
-                    const channelGroup = allCards.find((group) =>
-                      group.matched_board.some((b) => b.original === row.requirement),
-                    )
-                    const channelType = channelGroup?.Channels_type
-
-                    return (
-                      <TableRow key={index}>
-                        <TableCell
-                          className="font-medium cursor-pointer hover:text-primary hover:underline transition-colors"
-                          onClick={() => handleRequirementClick(row.requirement, channelType)}
-                        >
-                          {row.requirement}
-                        </TableCell>
-                        <TableCell>
-                          <Badge variant="outline" className={getMatchColor(parseFloat(row.matchRate) / 100)}>
-                            {row.matchRate}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
+                  {boardResults.map((row, index) => (
+                    <TableRow key={index}>
+                      <TableCell
+                        className={`font-medium transition-colors ${
+                          row.isNotFound
+                            ? "text-red-600 font-semibold"
+                            : "cursor-pointer hover:text-primary hover:underline"
+                        }`}
+                        onClick={() => !row.isNotFound && handleRequirementClick(row.requirement, row.channelType)}
+                      >
+                        {row.requirement}
+                      </TableCell>
+                      <TableCell>
+                        <Badge variant="outline" className={getMatchColor(parseFloat(row.matchRate) / 100)}>
+                          {row.matchRate}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        {row.product === "/" ? (
+                          <span className="font-semibold text-muted-foreground">/</span>
+                        ) : (
                           <ProductTooltip productName={row.product} description={row.description}>
                             <span className="font-mono text-primary cursor-help">{row.product}</span>
                           </ProductTooltip>
-                        </TableCell>
-                        <TableCell className="font-semibold">{row.price}</TableCell>
-                        <TableCell className="text-muted-foreground">{row.suggestion}</TableCell>
-                      </TableRow>
-                    )
-                  })}
+                        )}
+                      </TableCell>
+                      <TableCell className="font-semibold">{row.price}</TableCell>
+                      <TableCell className="text-muted-foreground">{row.suggestion}</TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </div>
