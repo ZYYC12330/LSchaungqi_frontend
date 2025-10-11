@@ -1,9 +1,10 @@
 import type { FileUploadResponse, WorkflowResponse, WorkflowAPIResponse } from "@/types/api"
+import { config } from "@/lib/config"
 
-// API 配置
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://demo.langcore.cn"
-const API_TOKEN = process.env.NEXT_PUBLIC_API_TOKEN 
-const WORKFLOW_ID = process.env.NEXT_PUBLIC_WORKFLOW_ID 
+// API 配置（使用运行时配置）
+const API_URL = config.API_URL
+const API_TOKEN = config.API_TOKEN
+const WORKFLOW_ID = config.WORKFLOW_ID 
 
 // 错误类型
 export class APIError extends Error {

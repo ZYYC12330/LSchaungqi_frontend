@@ -19,6 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
+      <head>
+        {/* 加载运行时配置 - 修改此文件无需重新构建 */}
+        <script src="/config.js" />
+      </head>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable}`}>
         <AnalysisProvider>
           {children}
