@@ -18,7 +18,7 @@ import {
 import { useRouter } from "next/navigation"
 import { ArrowRight, CheckCircle2, AlertCircle, ArrowLeft } from "lucide-react"
 import { useAnalysis } from "@/contexts/AnalysisContext"
-import { formatMatchRate, getMatchColor, getChannelTypeName } from "@/types/api"
+import { formatMatchRate, getMatchColor, getChannelTypeName, getSimulatorRequirementType } from "@/types/api"
 import { useEffect, useState } from "react"
 
 export default function ResultsPage() {
@@ -69,6 +69,9 @@ export default function ResultsPage() {
     price: "包含",
     suggestion: detail.reason,
   }))
+
+  // 获取仿真机总价
+  const simulatorPrice = analysisResult.rawSimulator?.[0]?.price_cny || 0
 
   // 提取板卡结果
   const cardData = analysisResult.cards.Body
@@ -122,6 +125,14 @@ export default function ResultsPage() {
     router.push(`/products?requirement=${encodeURIComponent(queryParam)}`)
   }
 
+  const handleSimulatorRequirementClick = (detail: any) => {
+    // 获取需求类型（cpu/hard_disk/memory/slots）
+    const requirementType = getSimulatorRequirementType(detail)
+    if (requirementType) {
+      router.push(`/products?type=simulator&requirement=${encodeURIComponent(requirementType)}`)
+    }
+  }
+
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-12 max-w-7xl">
@@ -158,26 +169,34 @@ export default function ResultsPage() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {simulatorResults.map((row, index) => (
-                    <TableRow key={index}>
-                      <TableCell className="font-medium">{row.requirement}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className={getMatchColor(parseFloat(row.matchRate) / 100)}>
-                          {row.matchRate}
-                        </Badge>
-                      </TableCell>
-                      <TableCell>
-                        <ProductTooltip productName={row.product} description={row.description}>
-                          <span className="font-mono text-primary cursor-help">{row.product}</span>
-                        </ProductTooltip>
-                      </TableCell>
-                      <TableCell className="text-muted-foreground">{row.suggestion}</TableCell>
-                    </TableRow>
-                  ))}
+                  {simulatorResults.map((row, index) => {
+                    const detail = simulatorDetails[index]
+                    return (
+                      <TableRow key={index}>
+                        <TableCell
+                          className="font-medium cursor-pointer hover:text-primary hover:underline transition-colors"
+                          onClick={() => handleSimulatorRequirementClick(detail)}
+                        >
+                          {row.requirement}
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline" className={getMatchColor(parseFloat(row.matchRate) / 100)}>
+                            {row.matchRate}
+                          </Badge>
+                        </TableCell>
+                        <TableCell>
+                          <ProductTooltip productName={row.product} description={row.description}>
+                            <span className="font-mono text-primary cursor-help">{row.product}</span>
+                          </ProductTooltip>
+                        </TableCell>
+                        <TableCell className="text-muted-foreground">{row.suggestion}</TableCell>
+                      </TableRow>
+                    )
+                  })}
                   <TableRow className="bg-accent/10 font-bold">
                     <TableCell colSpan={2}>总价</TableCell>
                     <TableCell colSpan={2} className="text-lg">
-                      ¥80,000
+                      ¥{simulatorPrice.toLocaleString()}
                     </TableCell>
                   </TableRow>
                 </TableBody>

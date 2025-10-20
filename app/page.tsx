@@ -17,7 +17,7 @@ export default function UploadPage() {
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState<string>("")
   const router = useRouter()
-  const { setAnalysisResult, clearAnalysisResult } = useAnalysis()
+  const { setAnalysisResult, addToHistory } = useAnalysis()
 
   // 清除旧的分析结果（当用户准备上传新文件时）
   useEffect(() => {
@@ -61,12 +61,19 @@ export default function UploadPage() {
 
       setUploadProgress("正在提取技术需求...")
 
-      // 保存分析结果到 context（包含新增的 raw_sim 和 unsatisfied 数据）
-      setAnalysisResult({
+      // 保存分析结果到 context（包含新增的 raw_sim、unsatisfied 和 simPickList 数据）
+      const analysisResult = {
         simulator: result.simulator,
         cards: result.cards,
+        rawSimulator: result.rawSimulator,
+        unsatisfied: result.unsatisfied,
+        simPickList: result.simPickList,
         timestamp: Date.now(),
-      })
+      }
+      setAnalysisResult(analysisResult)
+
+      // 添加到历史记录
+      addToHistory(file.name, analysisResult)
 
       setUploadProgress("分析完成！")
       toast.success("分析完成", {

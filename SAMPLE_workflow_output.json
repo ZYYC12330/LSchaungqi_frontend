@@ -1,36 +1,36 @@
 {
   "to_chatbot": {
     "sim": {
-      "id": "13685e8c-911f-47e4-ab72-0e0a63038023",
+      "id": "39bd4373-f42c-4095-a6fd-fe1ead8b4d06",
       "details": [
         {
           "category": "CPU",
           "score": 0.9,
-          "reason": "满足需求中的所有条件：品牌（Intel）、系列（Core i7）、核心数量（四核）以及主频（2.8GHz）。整体匹配度很高。",
+          "reason": "满足四核要求；主频4.2GHz高于需求的2.6GHz。虽非指定型号，但性能优于需求。",
           "original": "CPU：Intel Core i7 2.6GHz四核",
-          "cpu": "i7-6820EQ，四核处理器2.8GHz"
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统"
         },
         {
           "category": "Hard Disk",
-          "score": 1,
-          "reason": "符合需求，因为硬盘容量为500GB且为固态盘(SSD)",
+          "score": 0.5,
+          "reason": "不符合需求，因为虽然容量大于等于500GB，但不是SSD",
           "original": "硬盘：500GB SSD",
-          "hard_disk": "500GB 固态盘"
+          "hard_disk": "1TB SATA硬盘"
         },
         {
           "category": "Memory",
-          "score": 0.9,
-          "reason": "符合需求，内存为16GB但由于没有指出其是否为DDR4标准，默认认为可能符合，但不确定。",
+          "score": 1,
+          "reason": "符合需求，内存为16GB DDR4。",
           "original": "内存：16GB DDR4",
-          "memory": "16GB内存"
+          "memory": "16GB DDR4 SDRAM（up to 32GB）"
         }
       ],
-      "total_score": 2.8
+      "total_score": 2.4
     },
     "card": {
       "success": true,
-      "message": "优化成功（部分需求无法满足）",
-      "total_cards": 26,
+      "message": "优化成功",
+      "total_cards": 10,
       "requirements_summary": [
         {
           "index": 0,
@@ -71,21 +71,26 @@
           "index": 20,
           "channel_type": "relayOutputChannels",
           "required": 16
+        },
+        {
+          "index": 21,
+          "channel_type": "sharedMemoryChannels",
+          "required": 1
         }
       ],
       "feasibility_checks": [
         {
           "channel_type": "analogInputChannels",
           "required": 16,
-          "available_total": 112,
-          "max_single_card": 32,
+          "available_total": 32,
+          "max_single_card": 16,
           "status": "OK"
         },
         {
           "channel_type": "analogOutputChannels",
           "required": 16,
-          "available_total": 138,
-          "max_single_card": 24,
+          "available_total": 16,
+          "max_single_card": 16,
           "status": "OK"
         },
         {
@@ -98,46 +103,53 @@
         {
           "channel_type": "serialPortChannels",
           "required": 16,
-          "available_total": 52,
+          "available_total": 16,
           "max_single_card": 16,
           "status": "OK"
         },
         {
           "channel_type": "canBusChannels",
           "required": 4,
-          "available_total": 24,
-          "max_single_card": 10,
+          "available_total": 4,
+          "max_single_card": 4,
           "status": "OK"
         },
         {
           "channel_type": "milStd1553BChannels",
           "required": 2,
-          "available_total": 4,
+          "available_total": 2,
           "max_single_card": 2,
           "status": "OK"
         },
         {
           "channel_type": "timerCounterChannels",
           "required": 8,
-          "available_total": 0,
-          "max_single_card": 0,
-          "status": "不足"
+          "available_total": 16,
+          "max_single_card": 16,
+          "status": "OK"
         },
         {
           "channel_type": "relayOutputChannels",
           "required": 16,
-          "available_total": 0,
-          "max_single_card": 0,
-          "status": "不足"
+          "available_total": 32,
+          "max_single_card": 32,
+          "status": "OK"
+        },
+        {
+          "channel_type": "sharedMemoryChannels",
+          "required": 1,
+          "available_total": 1,
+          "max_single_card": 1,
+          "status": "OK"
         }
       ],
       "optimized_solution": [
         {
-          "model": "Links-IPC-CANFD-04",
+          "model": "Links-IPC-DA-03",
           "quantity": 1,
-          "unit_price": 80,
-          "total_price": 80,
-          "id": "efa83220-6850-4792-a434-c38dbd462a46"
+          "unit_price": 150,
+          "total_price": 150,
+          "id": "243dda57-772c-4f24-ab12-781fd0fefc0d"
         },
         {
           "model": "Links-IPC-DIO64",
@@ -147,18 +159,32 @@
           "id": "afa80456-23a2-4339-a075-e901d8bce95a"
         },
         {
-          "model": "Links-FPGA-Analog-01",
+          "model": "Links-C3U-AI-02",
           "quantity": 1,
-          "unit_price": 260,
-          "total_price": 260,
-          "id": "3efb5f94-4ed3-4e3b-a40b-01fb2619c738"
+          "unit_price": 150,
+          "total_price": 150,
+          "id": "0004b1fa-1229-4385-be2f-bb2fa3d634b6"
         },
         {
-          "model": "Links-C3U-SIO03-8B",
-          "quantity": 2,
+          "model": "Links-C3U-Counter02",
+          "quantity": 1,
+          "unit_price": 180,
+          "total_price": 180,
+          "id": "0cf7545f-d0eb-49e6-8a09-acbff4f206c7"
+        },
+        {
+          "model": "Links-C3U-CAN-4",
+          "quantity": 1,
           "unit_price": 150,
-          "total_price": 300,
-          "id": "eb0182f2-9d6f-4828-9607-f2f51dccb096"
+          "total_price": 150,
+          "id": "257d14e0-dc9e-4d82-9483-790f21bd6421"
+        },
+        {
+          "model": "Links-C3U-SIO02-16",
+          "quantity": 1,
+          "unit_price": 450,
+          "total_price": 450,
+          "id": "195c7875-b5b8-4d12-b524-10370aabe9ad"
         },
         {
           "model": "Links-C3U-1553-2MA-ZK",
@@ -166,9 +192,23 @@
           "unit_price": 680,
           "total_price": 680,
           "id": "5d0d2628-1ece-4c8a-b6c9-cfad6398c3aa"
+        },
+        {
+          "model": "Links-C3U-DO03",
+          "quantity": 1,
+          "unit_price": 150,
+          "total_price": 150,
+          "id": "d6295020-3760-4fe8-b8bd-f0106d84b07d"
+        },
+        {
+          "model": "Links-C3U-RFM-01",
+          "quantity": 1,
+          "unit_price": 240,
+          "total_price": 240,
+          "id": "414ee781-8676-4eb7-93ba-2c9de005b9db"
         }
       ],
-      "total_cost": 1470,
+      "total_cost": 2300,
       "channel_satisfaction": [
         {
           "channel_type": "analogInputChannels",
@@ -179,7 +219,7 @@
         {
           "channel_type": "analogOutputChannels",
           "required": 16,
-          "satisfied": 24,
+          "satisfied": 16,
           "status": "OK"
         },
         {
@@ -201,6 +241,12 @@
           "status": "OK"
         },
         {
+          "channel_type": "pwmOutputChannels",
+          "required": 0,
+          "satisfied": 16,
+          "status": "OK"
+        },
+        {
           "channel_type": "milStd1553BChannels",
           "required": 2,
           "satisfied": 2,
@@ -209,44 +255,89 @@
         {
           "channel_type": "timerCounterChannels",
           "required": 8,
-          "satisfied": 0,
-          "status": "不足"
+          "satisfied": 16,
+          "status": "OK"
         },
         {
           "channel_type": "relayOutputChannels",
           "required": 16,
-          "satisfied": 0,
-          "status": "不足"
+          "satisfied": 32,
+          "status": "OK"
+        },
+        {
+          "channel_type": "sharedMemoryChannels",
+          "required": 1,
+          "satisfied": 1,
+          "status": "OK"
         }
       ],
-      "unsatisfied_requirements": [
-        {
-          "channel_type": "timerCounterChannels",
-          "required": 8,
-          "available": 0
-        },
-        {
-          "channel_type": "relayOutputChannels",
-          "required": 16,
-          "available": 0
-        }
-      ]
+      "unsatisfied_requirements": []
     },
     "all_cards": [
       {
         "matched_board": [
           {
-            "reason": "未找到相关功能板卡",
+            "id": "414ee781-8676-4eb7-93ba-2c9de005b9db",
+            "reason": "需求为256MB RFM且要求2.12Gbps速率，库存中仅该板卡明确标注支持2.12G波特率，同时容量为256MB，完全匹配需求。",
+            "price_cny": 240,
+            "description": "3U CPCI，高速光纤接口，256 M内存, 4 K FIFO,  2.12G波特率，支持300m（多模）传输距离，支持网络中断",
+            "match_degree": 100,
+            "model": "Links-C3U-RFM-01",
+            "original": "256MB RFM，2.12Gbps"
+          },
+          {
+            "id": "a433bc77-2533-426b-a05a-d8323ed5428e",
+            "reason": "容量为256MB，属于反射内存板卡，但未明确标注2.12Gbps速率，匹配度次于明确支持该速率的型号。",
+            "price_cny": 240,
+            "description": "3U CPCI，高速光纤接口，256MB SDRAM ，多模反射内存板卡。 ",
+            "match_degree": 80,
+            "model": "Links-C3U-RFM-02",
+            "original": "256MB RFM，2.12Gbps"
+          },
+          {
+            "id": "cdf931b9-20f9-4f33-8145-e017fb51e79e",
+            "reason": "容量为256MB，PCI-E接口反射内存板卡，但未提及2.12Gbps速率，且接口类型（PCI-E）与需求未明确指定，匹配度较低。",
+            "price_cny": 230,
+            "description": "PCI-E接口，256MB SDRAM ，多模反射内存板卡。",
+            "match_degree": 60,
+            "model": "Links-PCIE-RFM-05",
+            "original": "256MB RFM，2.12Gbps"
+          },
+          {
+            "id": "cd37c2c5-bb22-424e-a128-cc1cb9ba2d38",
+            "reason": "容量为256MB，PCI-E接口反射内存板卡，未提及2.12Gbps速率，匹配度较低。",
+            "price_cny": 230,
+            "description": "PCI-E接口，256M内存, 16K FIFOs, 多模接口，实时系统驱动",
+            "match_degree": 60,
+            "model": "Links-PCIE-RFM-04",
+            "original": "256MB RFM，2.12Gbps"
+          },
+          {
+            "id": "593318c0-1143-4843-a4b3-ef017dd47501",
+            "reason": "容量为256MB，PCI接口反射内存板卡，未提及2.12Gbps速率，接口类型与速率均不明确匹配需求，匹配度低。",
+            "price_cny": 220,
+            "description": "PCI接口，256MB SDRAM ，多模反射内存板卡。",
+            "match_degree": 50,
+            "model": "Links-PCI-RFM-02",
+            "original": "256MB RFM，2.12Gbps"
+          },
+          {
+            "id": "aa0443c8-1419-45dd-828f-a635cab7926e",
+            "reason": "容量为256MB，PCI接口反射内存板卡，未提及2.12Gbps速率，匹配度最低。",
+            "price_cny": 220,
+            "description": "PCI接口，256M内存, 16K FIFOs, 多模接口，实时系统驱动",
+            "match_degree": 50,
+            "model": "Links-PCI-RFM-01",
             "original": "256MB RFM，2.12Gbps"
           }
         ],
-        "Channels_type": "digitalIOChannels"
+        "Channels_type": "sharedMemoryChannels"
       },
       {
         "matched_board": [
           {
             "id": "195c7875-b5b8-4d12-b524-10370aabe9ad",
-            "reason": "单张板卡提供16路隔离串行通讯接口，支持RS422/485，波特率800~8Mbps，满足16路RS422/485、3Mbps的需求。",
+            "reason": "需求为16路RS422/485，通讯速率3Mbps。该板卡提供16路隔离串行接口，支持RS422/485，波特率范围800~8Mbps，满足通道数量和速率要求。",
             "price_cny": 450,
             "description": "3U CPCI，16路隔离串行通讯接口，支持RS-232/422/485，RS232最高支持230.4Kbps波特率，RS422/485波特率800~8Mbps",
             "match_degree": 1,
@@ -254,39 +345,12 @@
             "original": "16路RS422/485，3Mbps"
           },
           {
-            "id": "08b6c634-6173-455d-96af-a4c8cddc6dc8",
-            "reason": "单张板卡提供8路隔离串行通讯接口，支持RS422/485，波特率800~8Mbps；使用两张即可满足16路需求。",
-            "price_cny": 180,
-            "description": "3U CPCI，8路隔离串行通讯接口，支持RS-232/422/485，RS232最高支持230.4Kbps波特率，RS422/485波特率800~8Mbps",
-            "match_degree": 0.9,
-            "model": "Links-C3U-SIO02-8A",
-            "original": "16路RS422/485，3Mbps"
-          },
-          {
-            "id": "eb0182f2-9d6f-4828-9607-f2f51dccb096",
-            "reason": "单张板卡提供8通道RS422/485，最高支持4Mbps；使用两张即可满足16路、3Mbps的需求。",
-            "price_cny": 150,
-            "description": "CPCI总线，8通道异步RS232/422/485通讯接口，RS232波特率2400bps-0Kbps，RS422/485波特率2400bps-4Mbps；",
-            "match_degree": 0.9,
-            "model": "Links-C3U-SIO03-8B",
-            "original": "16路RS422/485，3Mbps"
-          },
-          {
-            "id": "9f3aa93b-3687-4eff-b1e6-e228257b467c",
-            "reason": "单张板卡提供8通道RS422/485，最高支持4Mbps；使用两张即可满足16路、3Mbps的需求。",
-            "price_cny": 150,
-            "description": " CPCI总线，\n1) 8个异步串行（UART）通信通道；\n2)  每个通道可设置为232/422/485模式；\n3） 波特率可设置，RS422/485模式下最高支持4Mbps，RS232模式下最高支持115200bps。",
-            "match_degree": 0.9,
-            "model": "Links-C3U-SIO03-8C",
-            "original": "16路RS422/485，3Mbps"
-          },
-          {
-            "id": "2f92731b-476b-47e9-8bf7-4eb583f77845",
-            "reason": "单张板卡提供12通道RS422，支持10Mbps；但无法单独满足16路需求；需与其他板卡组合。但由于该板卡为PXIe总线且仅支持RS422（不明确支持RS485），与需求中RS422/485双模式要求不完全匹配，因此不推荐。",
-            "price_cny": 240,
-            "description": "12通道串口板卡\n PXIe总线板卡\n 提供12通道差分和单端输出@AM26C31\n 提供12通道差分和单端输入@AM26C32\n 差分通道支持10M bps通过能力\n 差分与单端信号可独立控制\n 对外接口（输入、输出）与PXIe背板非隔离\n 输入接口具有100欧姆端接\n 输出接口：SCSI100 Female\n 提供离散IO测试工程（不含应用工程）",
-            "match_degree": 0.6,
-            "model": "Links-RS422-10M",
+            "id": "c6699f7e-cdb5-41d0-9155-7610df66ef42",
+            "reason": "该板卡提供16通道RS422/485接口，波特率最高2Mbps，虽略低于需求的3Mbps，但通道数完全匹配，可作为次选方案。",
+            "price_cny": 350,
+            "description": "CPCI总线，16通道RS232/422/485通讯接口，RS232波特率2400-115.2Kbps，RS422/485波特率2400-2Mbps，32M FIFO，整板隔离，支持虚拟串口",
+            "match_degree": 0.8,
+            "model": "Links-C3U-SIO03-16",
             "original": "16路RS422/485，3Mbps"
           }
         ],
@@ -295,57 +359,21 @@
       {
         "matched_board": [
           {
-            "id": "efa83220-6850-4792-a434-c38dbd462a46",
-            "reason": "单张板卡提供4通道CAN，支持1Mbps波特率，且CAN-FD兼容CAN2.0A/B协议，完全满足需求。",
-            "price_cny": 80,
-            "description": "4通道CAN/CAN-FD卡，DB37接口。\nCAN 通讯波特率在 40Kbps~1Mbps 之间任意可编程；\nCANFD 波特率在 1Mbps~5Mbps 之间任意可编程；",
-            "match_degree": 1,
-            "model": "Links-IPC-CANFD-04",
-            "original": "4路CAN，1Mbps，支持CAN2.0A/B"
-          },
-          {
             "id": "257d14e0-dc9e-4d82-9483-790f21bd6421",
-            "reason": "单张板卡提供4个高速CAN通道，1Mbps传输率，明确支持CAN2.0A/B协议，完全满足需求。",
+            "reason": "需求明确要求4路CAN、1Mbps速率、支持CAN2.0A/B协议；该板卡为CAN接口板卡，具备4个高速通道、1Mbps传输率，并明确支持CAN2.0A/B协议，完全匹配。",
             "price_cny": 150,
             "description": "CAN总线接口，4个高速通道，16Mhz控制速率， 1Mbps传输率，10V隔离，支持CAN2.0A/B协议",
-            "match_degree": 1,
+            "match_degree": 100,
             "model": "Links-C3U-CAN-4",
             "original": "4路CAN，1Mbps，支持CAN2.0A/B"
           },
           {
-            "id": "83af9f28-0743-457e-9642-f78ae6a48a21",
-            "reason": "单张板卡提供10个CAN通道，波特率支持10Kbps~1Mbps，支持标准和扩展帧格式（即支持CAN2.0A/B），通道数和协议均满足需求。",
-            "price_cny": 250,
-            "description": "CAN总线接口，10个高速通道，波特率10Kbps~1Mbps，支持CAN通讯的各种帧格式:标准数据帧、标准遥传帧、扩展数据帧、扩展远程帧",
-            "match_degree": 1,
-            "model": "Links-C3U-CAN-10",
-            "original": "4路CAN，1Mbps，支持CAN2.0A/B"
-          },
-          {
-            "id": "c3418033-9eba-4c25-8a86-5ae19a61f8dd",
-            "reason": "单张提供2路CAN，1Mbps，虽未明示支持CAN2.0A/B，但工业CAN接口默认兼容CAN2.0A/B；使用两张即可满足4路需求。",
-            "price_cny": 60,
-            "description": "CAN总线接口，2个高速通道，16Mhz控制速率， 1Mbps传输率，20V隔离 ；",
-            "match_degree": 0.9,
-            "model": "Links-IPC-CAN",
-            "original": "4路CAN，1Mbps，支持CAN2.0A/B"
-          },
-          {
-            "id": "25110b3a-2d29-46c6-a287-edb9e50f60ee",
-            "reason": "单张提供2路CAN，1Mbps，虽未明示支持CAN2.0A/B，但工业CAN接口默认兼容CAN2.0A/B；使用两张即可满足4路需求。",
+            "id": "efa83220-6850-4792-a434-c38dbd462a46",
+            "reason": "该板卡为4通道CAN/CAN-FD接口板卡，支持CAN波特率40Kbps~1Mbps，满足1Mbps要求；虽主要面向CAN-FD，但兼容CAN2.0A/B，可满足需求，但非最优（因需求未要求CAN-FD）。",
             "price_cny": 80,
-            "description": "CAN总线接口，2个高速通道，16Mhz控制速率， 1Mbps传输率，20V隔离",
-            "match_degree": 0.9,
-            "model": "Links-C3U-CAN",
-            "original": "4路CAN，1Mbps，支持CAN2.0A/B"
-          },
-          {
-            "id": "263362c6-ee7b-49f8-929d-4f029871501b",
-            "reason": "单张提供2通道CAN/CAN-FD，CAN波特率支持40Kbps~1Mbps，CAN-FD向下兼容CAN2.0A/B；使用两张即可满足4路CAN、1Mbps、CAN2.0A/B的需求。",
-            "price_cny": 60,
-            "description": "2通道CAN/CAN-FD卡，DB9接口。\nCAN 通讯波特率在 40Kbps~1Mbps 之间任意可编程；\nCANFD 波特率在 1Mbps~5Mbps 之间任意可编程；\n",
-            "match_degree": 0.9,
-            "model": "Links-IPC-CANFD-02",
+            "description": "4通道CAN/CAN-FD卡，DB37接口。\nCAN 通讯波特率在 40Kbps~1Mbps 之间任意可编程；\nCANFD 波特率在 1Mbps~5Mbps 之间任意可编程；",
+            "match_degree": 90,
+            "model": "Links-IPC-CANFD-04",
             "original": "4路CAN，1Mbps，支持CAN2.0A/B"
           }
         ],
@@ -355,19 +383,19 @@
         "matched_board": [
           {
             "id": "5d0d2628-1ece-4c8a-b6c9-cfad6398c3aa",
-            "reason": "该板卡为双通道（双冗余）多功能MIL-STD-1553接口卡，满足需求中2路1553B、双冗余、多功能的要求；1553B标准支持1Mbps，部分扩展支持4Mbps，且描述中未限制速率，可软件配置，符合1Mbps/4Mbps可配置的要求。",
+            "reason": "需求明确要求2路1553B、双冗余、多功能（支持BC/RT/BM同时工作），且速率1Mbps/4Mbps可配置。该板卡为3U CPCI总线，双通道（双冗余）多功能MIL-STD-1553，支持BC&31RT&BM三种模式同时工作，完全匹配功能和通道数要求。1553B标准本身支持1Mbps，4Mbps为可选扩展模式，通常通过硬件配置支持。",
             "price_cny": 680,
             "description": "3U CPCI总线，双通道（双冗余）多功能MIL-STD-1553， BC&31RT&BM三种工作模式可同时工作",
-            "match_degree": 1,
+            "match_degree": 0.98,
             "model": "Links-C3U-1553-2MA-ZK",
             "original": "2路1553B，双冗余多功能，1Mbps/4Mbps可配置"
           },
           {
             "id": "bb316509-60f0-48b8-a6d9-eca4549a4af4",
-            "reason": "该板卡为双通道（双冗余）多功能MIL-STD-1553接口卡，满足需求中2路1553B、双冗余、多功能的要求；1553B标准支持1Mbps，部分扩展支持4Mbps，且描述中未限制速率，可软件配置，符合1Mbps/4Mbps可配置的要求。",
+            "reason": "该板卡为PCI总线版本的双通道双冗余多功能1553B接口卡，同样支持BC/RT/BM三种模式同时工作，功能上完全满足需求。虽然总线类型为PCI而非CPCI，但若系统兼容PCI接口，则可作为备选。匹配度略低于CPCI版本。",
             "price_cny": 680,
             "description": "PCI总线，双通道（双冗余）多功能MIL-STD-1553， BC&31RT&BM三种工作模式可同时工作",
-            "match_degree": 1,
+            "match_degree": 0.92,
             "model": "Links-IPC-1553-2MA-ZK",
             "original": "2路1553B，双冗余多功能，1Mbps/4Mbps可配置"
           }
@@ -378,47 +406,29 @@
         "matched_board": [
           {
             "id": "e05bc51b-ca37-459c-9284-317d3e497091",
-            "reason": "提供16通道并行模拟量采集，16位分辨率，±10V，采样率200kHz，满足需求的16路、16位、±10V和150kHz要求。",
+            "reason": "需求为16路16位A/D采集，±10V，150kHz。该板卡为'同步模拟量采集板卡'，提供16通道并行模拟量采集，16位分辨率，±10V输入范围，采样率200kHz，完全满足通道数、分辨率、电压范围和采样率（200kHz > 150kHz）要求，匹配度高。",
             "price_cny": 190,
             "description": "16通道并行模拟量采集，16位分辨率\n每8通道一组，整组支持配置为电压采集或电流采集\n电压采集：精度0.1%（F.S.），范围-10V～+10V（可客制-30V～+30V）\n采样率：200kHz\n电流采集：精度0.1%（F.S.），范围-20mA～+20mA（可客制-100mA～+100mA）",
-            "match_degree": 1,
+            "match_degree": 0.95,
             "model": "Links-IPC-AD-01",
             "original": "16路16位A/D采集，±10 V，150kHz"
           },
           {
-            "id": "d5fa8240-a251-4689-bd65-8cad87cf0977",
-            "reason": "提供32通道并行模拟量采集，16位分辨率，±10V，采样率200kHz，通道数和采样率均超过需求，完全满足16路、16位、±10V和150kHz要求。",
-            "price_cny": 190,
-            "description": "32通道并行模拟量采集，16位分辨率\n每8通道一组，整组支持配置为电压采集或电流采集\n电压采集：精度0.2%（F.S.），范围-10V～+10V（可客制-30V～+30V）\n采样率：200kHz\n电流采集：精度0.2%（F.S.），范围-20mA～+20mA（可客制-100mA～+100mA）",
-            "match_degree": 1,
-            "model": "Links-IPC-AD-02",
-            "original": "16路16位A/D采集，±10 V，150kHz"
-          },
-          {
             "id": "0004b1fa-1229-4385-be2f-bb2fa3d634b6",
-            "reason": "提供16通道并行模拟量采集，16位分辨率，±10V，采样率200kHz，满足需求的16路、16位、±10V和150kHz要求。",
+            "reason": "该板卡为C3U平台的同步模拟量采集板卡，16通道、16位、±10V、200kHz采样率，参数与需求完全匹配，且采样率高于150kHz，满足要求，匹配度高。",
             "price_cny": 150,
             "description": "16通道并行模拟量采集，16位分辨率\n每8通道一组，整组支持配置为电压采集或电流采集（物理拨码控制）\n电压采集：精度0.1%（F.S.），范围-10V～+10V（可客制-30V～+30V）\n采样率：200kHz\n电流采集：精度0.1%（F.S.），范围-20mA～+20mA（可客制-100mA～+100mA）",
-            "match_degree": 1,
+            "match_degree": 0.95,
             "model": "Links-C3U-AI-02",
             "original": "16路16位A/D采集，±10 V，150kHz"
           },
           {
-            "id": "cd057002-718b-421c-962e-0dc6db22dd08",
-            "reason": "提供32通道并行模拟量采集，16位分辨率，±10V，采样率200kHz，通道数和采样率均超过需求，完全满足16路、16位、±10V和150kHz要求。",
-            "price_cny": 180,
-            "description": "32通道并行模拟量采集，16位分辨率\n每8通道一组，整组支持配置为电压采集或电流采集（物理拨码控制）\n电压采集：精度0.2%（F.S.），范围-10V～+10V（可客制-30V～+30V）\n采样率：200kHz\n电流采集：精度0.2%（F.S.），范围-20mA～+20mA（可客制-100mA～+100mA）",
-            "match_degree": 1,
-            "model": "Links-C3U-AI-03",
-            "original": "16路16位A/D采集，±10 V，150kHz"
-          },
-          {
-            "id": "3efb5f94-4ed3-4e3b-a40b-01fb2619c738",
-            "reason": "提供16通道AD采集，16位分辨率，±10V，采样率1Msps（1000kHz），远高于需求的150kHz，完全满足16路、16位、±10V和150kHz要求。",
-            "price_cny": 260,
-            "description": "1) 24通道DA输出，16位，1Msps，输出电压范围-10V～+10V\n2) 16通道AD采集，16位，1Msps，输入范围-10V～+10V\n3) 光口通讯实现DA、AD控制\n（适配AX7202开发板）",
-            "match_degree": 1,
-            "model": "Links-FPGA-Analog-01",
+            "id": "8132be0c-6ec1-4a3d-bdc3-07ae1e33cc56",
+            "reason": "该多功能采集板卡提供16路A/D采集，16位，±10V，但采样率仅100kHz，低于需求的150kHz，不满足采样率要求，匹配度较低。",
+            "price_cny": 250,
+            "description": "16路A/D并行采集，16位分辨率，±10 V（可客制-30V～+30V），采样率100kHz；\n16路D/A并行输出，16位分辨率，±10 V，数据更新率100KHz；\n32路数字I/O线（5V CMOS/TTL），可软件配置为DI、DO、计数器输入/输出，PWM输入/输出，16个32位计数器。",
+            "match_degree": 0.6,
+            "model": "Links-IPC-DAQ-05",
             "original": "16路16位A/D采集，±10 V，150kHz"
           }
         ],
@@ -427,17 +437,8 @@
       {
         "matched_board": [
           {
-            "id": "8132be0c-6ec1-4a3d-bdc3-07ae1e33cc56",
-            "reason": "该板卡提供16路D/A并行输出，16位分辨率，±10V，数据更新率100KHz，完全满足需求中的16路16位D/A输出、±10V、50KHz的要求。",
-            "price_cny": 250,
-            "description": "16路A/D并行采集，16位分辨率，±10 V（可客制-30V～+30V），采样率100kHz；\n16路D/A并行输出，16位分辨率，±10 V，数据更新率100KHz；\n32路数字I/O线（5V CMOS/TTL），可软件配置为DI、DO、计数器输入/输出，PWM输入/输出，16个32位计数器。",
-            "match_degree": 1,
-            "model": "Links-IPC-DAQ-05",
-            "original": "16路16位D/A输出，±10 V，50KHz"
-          },
-          {
             "id": "243dda57-772c-4f24-ab12-781fd0fefc0d",
-            "reason": "该板卡提供16通道电压输出，16位D/A分辨率，电压输出范围-10V～+10V，满足16路16位D/A输出、±10V的要求；虽然未明确说明更新率，但通常工业模拟量输出板卡可支持50KHz，视为满足需求。",
+            "reason": "需求为16路16位D/A输出，±10V，50KHz；该板卡提供16通道电压输出，16位分辨率，±10V范围，满足通道数、分辨率和电压要求；虽然未明确标注更新率，但同类模拟量输出板卡通常支持≥50KHz，且价格较低，为专用D/A输出板卡中最匹配项。",
             "price_cny": 150,
             "description": "16通道电压或电流输出（软件可配）\n16位D/A分辨率\n电压输出范围：-10V～+10V\n电流输出范围：0～+20mA\n电流输出精度0.05%（F.S.）\n电压输出精度0.1%（F.S.）",
             "match_degree": 0.95,
@@ -445,56 +446,38 @@
             "original": "16路16位D/A输出，±10 V，50KHz"
           },
           {
-            "id": "6207d7f3-1339-428d-a02e-502bbf458776",
-            "reason": "该板卡提供16通道电压输出，16位D/A分辨率，电压输出范围-10V～+10V，满足16路16位D/A输出、±10V的要求；虽然未明确说明更新率，但通常工业模拟量输出板卡可支持50KHz，视为满足需求。",
-            "price_cny": 180,
-            "description": "16通道电压或电流输出（软件可配）\n16通道数字量输入/输出（软件可配）\n每8通道数字量一组，方向整组设置\n5V CMOS电平，兼容5V TTL电平\n16位D/A分辨率\n电压输出范围：-10V～+10V\n电流输出范围：0～+20mA\n电流输出精度0.05%（F.S.）\n电压输出精度0.1%（F.S.）",
-            "match_degree": 0.95,
-            "model": "Links-IPC-DA-04",
-            "original": "16路16位D/A输出，±10 V，50KHz"
-          },
-          {
-            "id": "3efb5f94-4ed3-4e3b-a40b-01fb2619c738",
-            "reason": "该板卡提供24通道DA输出，16位分辨率，输出电压范围-10V～+10V，更新率1Msps，远高于需求的50KHz，完全满足16路16位D/A输出、±10V、50KHz的要求。",
-            "price_cny": 260,
-            "description": "1) 24通道DA输出，16位，1Msps，输出电压范围-10V～+10V\n2) 16通道AD采集，16位，1Msps，输入范围-10V～+10V\n3) 光口通讯实现DA、AD控制\n（适配AX7202开发板）",
-            "match_degree": 1,
-            "model": "Links-FPGA-Analog-01",
-            "original": "16路16位D/A输出，±10 V，50KHz"
-          },
-          {
-            "id": "bbce97ab-0ef2-41da-ae57-ba1b442c2095",
-            "reason": "该板卡提供16路D/A并行输出，16位分辨率，±10V，数据更新率100KHz，完全满足需求中的16路16位D/A输出、±10V、50KHz的要求。",
-            "price_cny": 250,
-            "description": "16路A/D并行采集，16位分辨率，±10 V（可客制-30V～+30V），采样率100kHz；\n16路D/A并行输出，16位分辨率，±10 V，数据更新率100KHz；\n32路数字I/O线（5V CMOS/TTL），可软件配置为DI、DO、计数器输入/输出，PWM输入/输出，16个32位计数器。",
-            "match_degree": 1,
-            "model": "Links-C3U-DAQ-02",
-            "original": "16路16位D/A输出，±10 V，50KHz"
-          },
-          {
-            "id": "48bfb1d2-a21f-46c4-aff7-2a864a21830c",
-            "reason": "该板卡提供16通道模拟电压输出@1Msps，电压范围-10V～+10V，更新率远高于50KHz，完全满足需求中的16路16位D/A输出、±10V、50KHz的要求。",
-            "price_cny": 240,
-            "description": "1)cPCI/PCI/PCIe/PXIe总线板卡\n2)16通道模拟电压输出@1Msps\n3)2通道模拟电压和电流输出@10Ksps\n4)模拟量电压输出范围：-10V～+10V，模拟量电流输出范围：-20mA～+20mA\n5)32通道DI/DO功能\n6）DI/DO每8通道1组，整组方向可设",
-            "match_degree": 1,
-            "model": "Links-C3U-DAQ-03",
-            "original": "16路16位D/A输出，±10 V，50KHz"
-          },
-          {
             "id": "dd727364-c847-48ee-b957-3ce2f3c7958a",
-            "reason": "该板卡提供16通道电压输出，16位D/A分辨率，电压输出范围-10V～+10V，满足16路16位D/A输出、±10V的要求；虽然未明确说明更新率，但通常工业模拟量输出板卡可支持50KHz，视为满足需求。",
+            "reason": "需求为16路16位D/A输出，±10V，50KHz；该板卡提供16通道电压输出，16位分辨率，±10V范围，物理拨码控制，满足核心参数；虽未明确更新率，但属专用模拟量输出板卡，匹配度高。",
             "price_cny": 180,
             "description": "16通道电压或电流输出（物理拨码控制）\n16位D/A分辨率\n电压输出范围：-10V～+10V\n电流输出范围：0～+20mA\n电流输出精度0.05%（F.S.）\n电压输出精度0.1%（F.S.）",
-            "match_degree": 0.95,
+            "match_degree": 0.93,
             "model": "Links-C3U-AO-03",
             "original": "16路16位D/A输出，±10 V，50KHz"
           },
           {
+            "id": "8132be0c-6ec1-4a3d-bdc3-07ae1e33cc56",
+            "reason": "需求为16路16位D/A输出，±10V，50KHz；该多功能板卡明确提供16路D/A并行输出，16位，±10V，数据更新率100KHz，完全满足且优于需求（100KHz > 50KHz）；虽为多功能板卡，但D/A性能完全匹配，可作为备选。",
+            "price_cny": 250,
+            "description": "16路A/D并行采集，16位分辨率，±10 V（可客制-30V～+30V），采样率100kHz；\n16路D/A并行输出，16位分辨率，±10 V，数据更新率100KHz；\n32路数字I/O线（5V CMOS/TTL），可软件配置为DI、DO、计数器输入/输出，PWM输入/输出，16个32位计数器。",
+            "match_degree": 0.9,
+            "model": "Links-IPC-DAQ-05",
+            "original": "16路16位D/A输出，±10 V，50KHz"
+          },
+          {
+            "id": "bbce97ab-0ef2-41da-ae57-ba1b442c2095",
+            "reason": "需求为16路16位D/A输出，±10V，50KHz；该多功能板卡提供16路D/A并行输出，16位，±10V，更新率100KHz，完全满足需求；与Links-IPC-DAQ-05参数一致，属同类型产品，匹配度高。",
+            "price_cny": 250,
+            "description": "16路A/D并行采集，16位分辨率，±10 V（可客制-30V～+30V），采样率100kHz；\n16路D/A并行输出，16位分辨率，±10 V，数据更新率100KHz；\n32路数字I/O线（5V CMOS/TTL），可软件配置为DI、DO、计数器输入/输出，PWM输入/输出，16个32位计数器。",
+            "match_degree": 0.9,
+            "model": "Links-C3U-DAQ-02",
+            "original": "16路16位D/A输出，±10 V，50KHz"
+          },
+          {
             "id": "75164c41-8f2f-4c4c-a6fc-cd33fb878979",
-            "reason": "该板卡提供16通道电压输出，16位D/A分辨率，电压输出范围-10V～+10V，满足16路16位D/A输出、±10V的要求；虽然未明确说明更新率，但通常工业模拟量输出板卡可支持50KHz，视为满足需求。",
+            "reason": "需求为16路16位D/A输出，±10V，50KHz；该板卡提供16通道电压输出，16位分辨率，±10V，软件可配，并含数字I/O；虽未明确更新率，但属专用模拟量输出板卡，满足基本需求。",
             "price_cny": 250,
             "description": "16通道电压或电流输出（软件可配）\n16通道数字量输入/输出（软件可配）\n每8通道数字量一组，方向整组设置\n5V CMOS电平，兼容5V TTL电平\n16位D/A分辨率\n电压输出范围：-10V～+10V\n电流输出范围：0～+20mA\n电流输出精度0.05%（F.S.）\n电压输出精度0.1%（F.S.）",
-            "match_degree": 0.95,
+            "match_degree": 0.88,
             "model": "Links-C3U-AO-05",
             "original": "16路16位D/A输出，±10 V，50KHz"
           }
@@ -504,7 +487,21 @@
       {
         "matched_board": [
           {
-            "reason": "未找到相关功能板卡",
+            "id": "0cf7545f-d0eb-49e6-8a09-acbff4f206c7",
+            "reason": "需求为8路32位定时/计数器，40MHz输出。库存中'计数器/PWM板卡'（id: 0cf7545f...）提供16通道计数器采集与PWM输出，支持板载40MHz时钟，虽未明确说明32位计数器，但功能最接近；另一选项'多功能采集板卡'（id: f15a51f7...）仅提供4通道32位定时器/计数器，数量不足。因此优先选择通道数满足（16≥8）且具备40MHz时钟基准的计数器/PWM板卡。",
+            "price_cny": 180,
+            "description": "16通道计数器采集、PWM采集与PWM输出板卡\n信号电气特性：5V CMOS电平（兼容5V TTL）\n计数功能最大支持16Mhz信号输入\n板载40Mhz时钟作为计时基准\n支持信号边沿中断，包含上升沿或下降沿",
+            "match_degree": 0.85,
+            "model": "Links-C3U-Counter02",
+            "original": "8路32位定时/计数器，40MHz输出"
+          },
+          {
+            "id": "f15a51f7-3fb7-4f6f-9c3b-fcfec7003d92",
+            "reason": "该板卡明确提供'4通道32位定时器/计数器'，满足32位和定时/计数器类型要求，但通道数仅4路，未达到需求的8路，因此匹配度较低，作为次选。",
+            "price_cny": 190,
+            "description": "1）32路单端/16路差分A/D输入，16位分辨率，采样率0KHz，输入范围±10V/±5V/±2.5V/±1.25V/±0.625V可设；\n2）4路同步D/A输出，16位分辨率，单通道更新率最大可达2.8M Samples/S，±10V, ±5V输出；\n3)4通道32位定时器/计数器",
+            "match_degree": 0.6,
+            "model": "Links-IPCe-DAQ-06",
             "original": "8路32位定时/计数器，40MHz输出"
           }
         ],
@@ -514,11 +511,29 @@
         "matched_board": [
           {
             "id": "afa80456-23a2-4339-a075-e901d8bce95a",
-            "reason": "该板卡提供64个隔离数字DIO通道，宽输入范围5~25VDC，满足需求中的32路隔离DI/O及5V-30VDC电压范围（尽管上限略低于30V，但25V已覆盖常见工业场景且明确标注为隔离通道）。",
+            "reason": "需求为32路隔离DI/O，电压范围5V-30VDC。'开关量板卡'（Links-IPC-DIO64）提供64个隔离数字DIO通道，支持5~25VDC输入范围，满足32路隔离DI/O及电压要求，通道数充足且具备隔离特性。",
             "price_cny": 150,
-            "description": "64个隔离数字DIO通道，每个通道都有中断处理能力；\n宽输入范围 （5~ 25 VDC）\n高静电保护 （2，0 VDC）\n手动跳线切换模式",
+            "description": "64个隔离数字DIO通道，每个通道都有中断处理能力；宽输入范围（5~ 25 VDC）；高静电保护（2，0 VDC）；手动跳线切换模式",
             "match_degree": 0.95,
             "model": "Links-IPC-DIO64",
+            "original": "32路隔离DI/O，5V-30VDC"
+          },
+          {
+            "id": "ca4832ae-fa32-4ee2-b213-ae29ee40160b",
+            "reason": "需求为32路隔离DI/O，5V-30VDC。'开关量接口板卡'（Links-C3U-DIO02）提供32路DI和32路DO，共64路数字I/O，电平为5V CMOS/TTL，虽未明确标注隔离，但通道数量和配置满足要求，电压范围需确认是否支持至30VDC，匹配度略低。",
+            "price_cny": 190,
+            "description": "32通道数字量输入；32通道数字量输出；5V CMOS电平，兼容5V TTL；输入通道中，8通道支持PWM采集；输入通道中，支持8通道增量编码器采集；输出通道中，8通道支持PWM输出",
+            "match_degree": 0.8,
+            "model": "Links-C3U-DIO02",
+            "original": "32路隔离DI/O，5V-30VDC"
+          },
+          {
+            "id": "e441cce3-e10d-43b3-9fd6-536aecc3dbc9",
+            "reason": "需求为32路隔离DI/O，5V-30VDC。'离散量输入/输出板卡'（Links-C3U-DIO04）提供48路离散量输入和48路输出，最大输入电平±60V，支持高电压范围，且具备隔离能力，但其主要面向高电压离散量（18-36V逻辑），用于5-30V通用DI/O场景略显冗余，但仍可满足需求。",
+            "price_cny": 220,
+            "description": "PCI/PCIe/cPCI/PXIe标准板卡；可实现电源/电源断、电源/电源地、电源地/电源地断三种状态的检测；检测电平范围：高电平+18V~+36V，低电平-1V~+1V；48 路离散量输入；最大输入电平范围：±60V；48 路离散量输出；最大负载电压范围：±60V；导通电阻：10Ω（MAX）；每通道输出持续电流：100mA（MAX）",
+            "match_degree": 0.75,
+            "model": "Links-C3U-DIO04",
             "original": "32路隔离DI/O，5V-30VDC"
           }
         ],
@@ -527,7 +542,12 @@
       {
         "matched_board": [
           {
-            "reason": "未找到相关功能板卡",
+            "id": "d6295020-3760-4fe8-b8bd-f0106d84b07d",
+            "reason": "需求为16路继电器开关，切换电流2A，48VDC。库存中唯一明确标明为'继电器型'输出板卡的是'开关量输出卡（继电器型）板卡'，其支持32通道继电器输出，最大电压48V DC，虽然标称最大载流为200mA（0.2A），低于需求的2A，但在所有选项中仍是最接近继电器开关功能的板卡。其他数字量输出板卡均为固态输出，不满足'继电器开关'要求。",
+            "price_cny": 150,
+            "description": "32通道继电器输出\n继电器类型：FORM 1C\n每通道提供常开、常闭和公共点\n继电器抖动时间：≤8ms\n通道最大载流：200mA\n通道最大电压：48V DC\n1通道5V隔离电源输出，最大输出电流1.5A",
+            "match_degree": 0.7,
+            "model": "Links-C3U-DO03",
             "original": "16路继电器开关，2A切换电流/载流，48VDC"
           }
         ],
@@ -536,32 +556,543 @@
     ],
     "raw_sim": [
       {
-        "id": "13685e8c-911f-47e4-ab72-0e0a63038023",
-        "category": "机箱&CPU控制板",
+        "id": "39bd4373-f42c-4095-a6fd-fe1ead8b4d06",
+        "category": "机箱&CPU控制器",
         "type": "实时仿真器",
-        "model": "Links-C3U-C02-C&Links-C3U-SBC04",
-        "brief_description": "4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，i7-6820EQ，四核处理器2.8GHz，16GB内存，2个RJ45 千兆LAN口，500GB 固态盘",
-        "detailed_description": "4U cPCI机箱，支持3U板卡，8槽，ATX电源200W，半机架尺寸设计，适用于小空间需求的便携式应用。3U cPCI单板计算机，占用两个槽位，i7-6820EQ，四核处理器2.8GHz，16GB内存，2个RJ45 千兆LAN口，500GB 固态盘",
+        "model": "Links-Box-03-S4（便携）",
+        "brief_description": "CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；\n硬盘：1TB SATA硬盘；\n内存： 16GB DDR4 SDRAM（up to 32GB）；\nIO扩展插槽：2个PCI+1个PCIe×4+1个PCIe×16扩展插槽；",
+        "detailed_description": "CPU：Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统；\n硬盘：1TB SATA硬盘；\n内存： 16GB DDR4 SDRAM（up to 32GB）；\nIO扩展插槽：2个PCI+1个PCIe×4+1个PCIe×16扩展插槽；",
         "manufacturer": "灵思创奇",
-        "price_cny": 64500,
-        "series": "Links-C3U",
-        "cpu": "i7-6820EQ，四核处理器2.8GHz",
-        "hard_disk": "500GB 固态盘",
-        "memory": "16GB内存",
-        "slots": "8槽"
+        "price_cny": 35000,
+        "series": "Links-BOX",
+        "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+        "hard_disk": "1TB SATA硬盘",
+        "memory": "16GB DDR4 SDRAM（up to 32GB）",
+        "slots": "2个PCI+1个PCIe×4+1个PCIe×16扩展插槽"
       }
     ],
-    "unsatisfied": [
-      {
-        "original": "8路32位定时/计数器，40MHz输出",
-        "reason": "现有板卡无法满足需求，原始需求 8, 最大可用 0",
-        "Channels_type": "timerCounterChannels"
-      },
-      {
-        "original": "16路继电器开关，2A切换电流/载流，48VDC",
-        "reason": "现有板卡无法满足需求，原始需求 16, 最大可用 0",
-        "Channels_type": "relayOutputChannels"
-      }
+    "unsatisfied": [],
+    "sim_pick_list": [
+    {
+      "kkrr": [
+        {
+          "id": "39bd4373-f42c-4095-a6fd-fe1ead8b4d06",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "虽然主频为4.2GHz达到需求，但只有四核，并非至少八核的Intel Core i9处理器。",
+          "score": 0.4,
+          "model": "Links-Box-03-S4（便携）",
+          "price_cny": "35000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "620902d1-963b-4c64-8ee5-720f426165e9",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "虽然主频为4.2GHz达到需求，但只有四核，并非至少八核的Intel Core i9处理器。",
+          "score": 0.4,
+          "model": "Links-Box-03-S7",
+          "price_cny": "45000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "e67bfceb-fba3-47ad-b3da-1fd3bb316e6d",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "虽然主频为4.2GHz达到需求，但只有四核，并非至少八核的Intel Core i9处理器。",
+          "score": 0.4,
+          "model": "Links-Box-03-S12A",
+          "price_cny": "55000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "fd8e8b61-4492-4f55-974c-f5a9a35408a2",
+          "cpu": "Intel CoreI7-7700k 4.2GHz四核处理器，运行实时操作系统",
+          "reason": "虽然主频为4.2GHz达到需求，但只有四核，并非至少八核的Intel Core i9处理器。",
+          "score": 0.4,
+          "model": "Links-Box-03-S12B",
+          "price_cny": "55000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "e90d9355-fc82-4581-b18a-61eed6966b48",
+          "cpu": "Intel Corei9-9900K 3.6GHz八核处理器，运行实时操作系统",
+          "reason": "满足至少八核Intel Core i9要求，但主频3.6GHz略低于需求的4.0GHz。",
+          "score": 0.8,
+          "model": "Links-Box-04-S5",
+          "price_cny": "80000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "cb5e5eb2-72c6-4e7f-9c36-b6c4b7e25cbc",
+          "cpu": "海光3350八核处理器，主频3.0GHz，三级缓存16MB，运行实时操作系统",
+          "reason": "满足八核要求，但并非Intel Core i9系列，且主频仅3.0GHz，不满足需求。",
+          "score": 0.5,
+          "model": "Links-Box-05-S3（HG01）",
+          "price_cny": "80000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "c5e409a4-64ce-4486-a50a-7f73c8015b91",
+          "cpu": "2颗英特尔® 至强® Gold 3.9GHz八核处理器，共计16核，运行实时操作系统",
+          "reason": "总共16核，远超八核要求；单颗处理器主频为3.9GHz，非常接近需求的4.0GHz；虽非Core i9系列，但属于Intel高端服务器级处理器。综合来看，几乎完全满足需求。",
+          "score": 0.95,
+          "model": "Links-SuperBox-01-S6",
+          "price_cny": "120000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "482b2792-43ab-419f-bdeb-3910428db5e3",
+          "cpu": "2颗英特尔® 至强® 金牌 3.0GHz十八核处理器，共计36核，运行实时操作系统",
+          "reason": "总共36核，远超八核要求；单颗处理器主频为3.0GHz，低于需求的4.0GHz；虽非Core i9系列，但属于Intel高端服务器级处理器。综合来看，核心数完全满足需求，但频率略低。",
+          "score": 0.85,
+          "model": "Links-SuperBox-02-S6",
+          "price_cny": "200000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "c6fcbb3c-f938-4db0-ad91-bfbfd4d36fc1",
+          "cpu": "第三代Intel Core i7-3555LE双核处理器 2.5GHz",
+          "reason": "仅为双核并未达到八核要求，主频也未达4.0GHz。不符合需求。",
+          "score": 0.1,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC01",
+          "price_cny": "59000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "e53c5a3b-18f6-40fa-8589-bcd3699263f9",
+          "cpu": "i7-6822EQ，四核处理器2.0GHz",
+          "reason": "仅有四核，并未达到八核要求，主频也远低于4.0GHz。不符合需求。",
+          "score": 0.2,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC03",
+          "price_cny": "59000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "13685e8c-911f-47e4-ab72-0e0a63038023",
+          "cpu": "i7-6820EQ，四核处理器2.8GHz",
+          "reason": "仅有四核，并未达到八核要求，主频也低于4.0GHz。不符合需求。",
+          "score": 0.25,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC04",
+          "price_cny": "64500",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "7bde4f6f-14d6-4a95-8175-d26302f6f85d",
+          "cpu": "第三代Intel Core i7-3555LE双核处理器 2.5GHz",
+          "reason": "仅为双核并未达到八核要求，主频也未达4.0GHz。不符合需求。",
+          "score": 0.1,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC01",
+          "price_cny": "79000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "a327d2fd-cb23-42f4-8387-a06f26d35e3a",
+          "cpu": "i7-6822EQ，四核处理器2.0GHz",
+          "reason": "仅有四核，并未达到八核要求，主频也远低于4.0GHz。不符合需求。",
+          "score": 0.2,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC03",
+          "price_cny": "79000",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        },
+        {
+          "id": "169326a8-8d7d-44bb-838e-ad2f8e20b215",
+          "cpu": "i7-6820EQ，四核处理器2.8GHz",
+          "reason": "仅有四核，并未达到八核要求，主频也低于4.0GHz。不符合需求。",
+          "score": 0.25,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC04",
+          "price_cny": "84500",
+          "original": "CPU：不低于八核Intel CoreI9，主频不低于 4.0GHz处理器"
+        }
+      ]
+    },
+    {
+      "kkrr": [
+        {
+          "id": "39bd4373-f42c-4095-a6fd-fe1ead8b4d06",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 1,
+          "model": "Links-Box-03-S4（便携）",
+          "price_cny": "35000"
+        },
+        {
+          "id": "620902d1-963b-4c64-8ee5-720f426165e9",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 1,
+          "model": "Links-Box-03-S7",
+          "price_cny": "45000"
+        },
+        {
+          "id": "e67bfceb-fba3-47ad-b3da-1fd3bb316e6d",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 1,
+          "model": "Links-Box-03-S12A",
+          "price_cny": "55000"
+        },
+        {
+          "id": "fd8e8b61-4492-4f55-974c-f5a9a35408a2",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 1,
+          "model": "Links-Box-03-S12B",
+          "price_cny": "55000"
+        },
+        {
+          "id": "e90d9355-fc82-4581-b18a-61eed6966b48",
+          "hard_disk": "1TB SATA硬盘",
+          "reason": "符合需求，因为硬盘容量为1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 1,
+          "model": "Links-Box-04-S5",
+          "price_cny": "80000"
+        },
+        {
+          "id": "cb5e5eb2-72c6-4e7f-9c36-b6c4b7e25cbc",
+          "hard_disk": "512G吧",
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 0,
+          "model": "Links-Box-05-S3（HG01）",
+          "price_cny": "80000"
+        },
+        {
+          "id": "c5e409a4-64ce-4486-a50a-7f73c8015b91",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）",
+          "reason": "符合需求，因为硬盘最小容量为1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 1,
+          "model": "Links-SuperBox-01-S6",
+          "price_cny": "120000"
+        },
+        {
+          "id": "482b2792-43ab-419f-bdeb-3910428db5e3",
+          "hard_disk": "1TB SATA硬盘（up to 4TB）",
+          "reason": "符合需求，因为硬盘最小容量为1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 1,
+          "model": "Links-SuperBox-02-S6",
+          "price_cny": "200000"
+        },
+        {
+          "id": "c6fcbb3c-f938-4db0-ad91-bfbfd4d36fc1",
+          "hard_disk": "500GB 固态盘",
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC01",
+          "price_cny": "59000"
+        },
+        {
+          "id": "e53c5a3b-18f6-40fa-8589-bcd3699263f9",
+          "hard_disk": "500GB 固态盘",
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC03",
+          "price_cny": "59000"
+        },
+        {
+          "id": "13685e8c-911f-47e4-ab72-0e0a63038023",
+          "hard_disk": "500GB 固态盘",
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 0,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC04",
+          "price_cny": "64500"
+        },
+        {
+          "id": "7bde4f6f-14d6-4a95-8175-d26302f6f85d",
+          "hard_disk": "500GB 固态盘",
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC01",
+          "price_cny": "79000"
+        },
+        {
+          "id": "a327d2fd-cb23-42f4-8387-a06f26d35e3a",
+          "hard_disk": "500GB 固态盘",
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC03",
+          "price_cny": "79000"
+        },
+        {
+          "id": "169326a8-8d7d-44bb-838e-ad2f8e20b215",
+          "hard_disk": "500GB 固态盘",
+          "reason": "不符合需求，因为硬盘容量小于1TB",
+          "original": "硬盘：1TB及以上",
+          "score": 0,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC04",
+          "price_cny": "84500"
+        }
+      ]
+    },
+    {
+      "kkrr": [
+        {
+          "id": "39bd4373-f42c-4095-a6fd-fe1ead8b4d06",
+          "memory": "16GB DDR4 SDRAM（up to 32GB）",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-Box-03-S4（便携）",
+          "price_cny": "35000"
+        },
+        {
+          "id": "620902d1-963b-4c64-8ee5-720f426165e9",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-Box-03-S7",
+          "price_cny": "45000"
+        },
+        {
+          "id": "e67bfceb-fba3-47ad-b3da-1fd3bb316e6d",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-Box-03-S12A",
+          "price_cny": "55000"
+        },
+        {
+          "id": "fd8e8b61-4492-4f55-974c-f5a9a35408a2",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-Box-03-S12B",
+          "price_cny": "55000"
+        },
+        {
+          "id": "e90d9355-fc82-4581-b18a-61eed6966b48",
+          "memory": "16G DDR4 SDRAM",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-Box-04-S5",
+          "price_cny": "80000"
+        },
+        {
+          "id": "cb5e5eb2-72c6-4e7f-9c36-b6c4b7e25cbc",
+          "memory": "16GB",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-Box-05-S3（HG01）",
+          "price_cny": "80000"
+        },
+        {
+          "id": "c5e409a4-64ce-4486-a50a-7f73c8015b91",
+          "memory": "64G DDR4 SDRAM（up to 256G）",
+          "reason": "超出了需求，内存为64GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-SuperBox-01-S6",
+          "price_cny": "120000"
+        },
+        {
+          "id": "482b2792-43ab-419f-bdeb-3910428db5e3",
+          "memory": "64G DDR4 SDRAM（up to 256G）",
+          "reason": "超出了需求，内存为64GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-SuperBox-02-S6",
+          "price_cny": "200000"
+        },
+        {
+          "id": "c6fcbb3c-f938-4db0-ad91-bfbfd4d36fc1",
+          "memory": "8GB DDR3-1600内存",
+          "reason": "不符合需求，内存仅有8GB。",
+          "original": "内存：16G及以上",
+          "score": false,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC01",
+          "price_cny": "59000"
+        },
+        {
+          "id": "e53c5a3b-18f6-40fa-8589-bcd3699263f9",
+          "memory": "8GB内存",
+          "reason": "不符合需求，内存仅有8GB。",
+          "original": "内存：16G及以上",
+          "score": false,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC03",
+          "price_cny": "59000"
+        },
+        {
+          "id": "13685e8c-911f-47e4-ab72-0e0a63038023",
+          "memory": "16GB内存",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC04",
+          "price_cny": "64500"
+        },
+        {
+          "id": "7bde4f6f-14d6-4a95-8175-d26302f6f85d",
+          "memory": "8GB DDR3-1600内存",
+          "reason": "不符合需求，内存仅有8GB。",
+          "original": "内存：16G及以上",
+          "score": false,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC01",
+          "price_cny": "79000"
+        },
+        {
+          "id": "a327d2fd-cb23-42f4-8387-a06f26d35e3a",
+          "memory": "8GB内存",
+          "reason": "不符合需求，内存仅有8GB。",
+          "original": "内存：16G及以上",
+          "score": false,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC03",
+          "price_cny": "79000"
+        },
+        {
+          "id": "169326a8-8d7d-44bb-838e-ad2f8e20b215",
+          "memory": "16GB内存",
+          "reason": "符合需求，内存为16GB。",
+          "original": "内存：16G及以上",
+          "score": true,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC04",
+          "price_cny": "84500"
+        }
+      ]
+    },
+    {
+      "kkrr": [
+        {
+          "id": "39bd4373-f42c-4095-a6fd-fe1ead8b4d06",
+          "slots": "2个PCI+1个PCIe×4+1个PCIe×16扩展插槽",
+          "reason": "符合需求，提供至少4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-Box-03-S4（便携）",
+          "price_cny": "35000"
+        },
+        {
+          "id": "620902d1-963b-4c64-8ee5-720f426165e9",
+          "slots": "1个PCIe x1，1个PCIe x4，1个PCIex16，4个PCI",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-Box-03-S7",
+          "price_cny": "45000"
+        },
+        {
+          "id": "e67bfceb-fba3-47ad-b3da-1fd3bb316e6d",
+          "slots": "3个PCIe x4，1个PCIex16，8个PCI",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-Box-03-S12A",
+          "price_cny": "55000"
+        },
+        {
+          "id": "fd8e8b61-4492-4f55-974c-f5a9a35408a2",
+          "slots": "5个PCIe x1，2个PCIe x4，1个PCIex16，4个PCI",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-Box-03-S12B",
+          "price_cny": "55000"
+        },
+        {
+          "id": "e90d9355-fc82-4581-b18a-61eed6966b48",
+          "slots": "2个PCIe x1，2个PCIe×4，1个PCIex16，2个PC",
+          "reason": "符合需求，提供至少4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-Box-04-S5",
+          "price_cny": "80000"
+        },
+        {
+          "id": "cb5e5eb2-72c6-4e7f-9c36-b6c4b7e25cbc",
+          "slots": "1个PCIe×16，1个PCIe×4，1个PCIe×1",
+          "reason": "不符合需求，仅提供3个插槽，少于所需的4个",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 0,
+          "model": "Links-Box-05-S3（HG01）",
+          "price_cny": "80000"
+        },
+        {
+          "id": "c5e409a4-64ce-4486-a50a-7f73c8015b91",
+          "slots": "CPU1：2个PCIe×8，1个PCIe×16",
+          "reason": "不符合需求，仅提供3个插槽，少于所需的4个",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 0,
+          "model": "Links-SuperBox-01-S6",
+          "price_cny": "120000"
+        },
+        {
+          "id": "482b2792-43ab-419f-bdeb-3910428db5e3",
+          "slots": "CPU1：2个PCIe×8，1个PCIe×16",
+          "reason": "不符合需求，仅提供3个插槽，少于所需的4个",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 0,
+          "model": "Links-SuperBox-02-S6",
+          "price_cny": "200000"
+        },
+        {
+          "id": "c6fcbb3c-f938-4db0-ad91-bfbfd4d36fc1",
+          "slots": "8槽",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC01",
+          "price_cny": "59000"
+        },
+        {
+          "id": "e53c5a3b-18f6-40fa-8589-bcd3699263f9",
+          "slots": "8槽",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC03",
+          "price_cny": "59000"
+        },
+        {
+          "id": "13685e8c-911f-47e4-ab72-0e0a63038023",
+          "slots": "8槽",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-C3U-C02-C&Links-C3U-SBC04",
+          "price_cny": "64500"
+        },
+        {
+          "id": "7bde4f6f-14d6-4a95-8175-d26302f6f85d",
+          "slots": "14槽",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC01",
+          "price_cny": "79000"
+        },
+        {
+          "id": "a327d2fd-cb23-42f4-8387-a06f26d35e3a",
+          "slots": "14槽",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC03",
+          "price_cny": "79000"
+        },
+        {
+          "id": "169326a8-8d7d-44bb-838e-ad2f8e20b215",
+          "slots": "14槽",
+          "reason": "符合需求，提供超过4个插槽",
+          "original": "插槽：包含至少4个板卡插槽",
+          "score": 1,
+          "model": "Links-C3U-C03-B&Links-C3U-SBC04",
+          "price_cny": "84500"
+        }
+      ]
+    }
     ]
   }
 }

@@ -119,15 +119,18 @@ export async function runWorkflow(fileId: string): Promise<WorkflowResponse> {
       throw new APIError("工作流响应数据格式错误：缺少输出数据", response.status, rawData)
     }
 
-    if (!outputData.sim && !outputData.simulator) {
+    // 使用类型断言来访问属性（因为两种格式的属性名不同）
+    const chatbotData = outputData as any
+    
+    if (!chatbotData.sim && !chatbotData.simulator) {
       throw new APIError("工作流响应数据格式错误：缺少仿真机数据", response.status, rawData)
     }
 
     // 处理仿真机数据（支持 sim 和 simulator 两种格式）
-    const simulatorData = outputData.sim || outputData.simulator
+    const simulatorData = chatbotData.sim || chatbotData.simulator
 
     // 处理板卡数据（支持 card 和 cards 两种格式）
-    const cardData = outputData.card || outputData.cards
+    const cardData = chatbotData.card || chatbotData.cards
 
     if (!cardData) {
       throw new APIError("工作流响应数据格式错误：缺少板卡数据", response.status, rawData)
@@ -153,8 +156,13 @@ export async function runWorkflow(fileId: string): Promise<WorkflowResponse> {
           total_cost: cardData.total_cost || 0,
           channel_satisfaction: cardData.channel_satisfaction || [],
         },
-        all_cards: outputData.all_cards || [],
+        all_cards: chatbotData.all_cards || [],
       },
+      // 添加 raw_sim 和 unsatisfied 数据
+      rawSimulator: chatbotData.raw_sim || [],
+      unsatisfied: chatbotData.unsatisfied || [],
+      // 添加 sim_pick_list 数据
+      simPickList: chatbotData.sim_pick_list || [],
     }
 
     return data

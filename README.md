@@ -2,6 +2,18 @@
 
 > 基于 AI 的仿真机和板卡智能选型解决方案
 
+
+pm2 start pnpm --name "LSchaungqi-frontend" -- run dev
+
+pm2 stop LSchaungqi-frontend
+
+
+docker build --network host .
+
+docker run -p 8019:8000 linprog-app
+
+
+
 ## 📖 简介
 
 本系统是一个智能化的产品选型平台，通过上传需求文档，自动分析并生成最优的仿真机和板卡采购方案。系统集成了先进的 AI 技术和线性规划优化算法，为用户提供专业、高效的选型服务。

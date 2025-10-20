@@ -118,6 +118,25 @@ export interface UnsatisfiedRequirement {
   Channels_type: string
 }
 
+// 仿真机候选列表项
+export interface SimulatorCandidate {
+  id: string
+  cpu?: string
+  hard_disk?: string
+  memory?: string
+  slots?: string
+  reason: string
+  score: number | boolean  // score 可能是数字或布尔值
+  original: string
+  model?: string  // 仿真机型号
+  price_cny?: string | number  // 价格（可能是字符串或数字）
+}
+
+// 仿真机候选列表组
+export interface SimulatorPickList {
+  kkrr: SimulatorCandidate[]
+}
+
 // 新格式 to_chatbot 输出数据
 export interface ToChatbotOutput {
   sim: {
@@ -143,6 +162,7 @@ export interface ToChatbotOutput {
   all_cards: AllCardChannel[]
   raw_sim: RawSimulator[]
   unsatisfied: UnsatisfiedRequirement[]
+  sim_pick_list?: SimulatorPickList[]
 }
 
 // 旧格式 to_web 输出数据
@@ -176,6 +196,9 @@ export interface WorkflowAPIResponse {
 export interface WorkflowResponse {
   simulator: SimulatorResult
   cards: CardResult
+  rawSimulator?: RawSimulator[]  // 原始仿真机信息
+  unsatisfied?: UnsatisfiedRequirement[]  // 未满足的需求
+  simPickList?: SimulatorPickList[]  // 仿真机候选列表
 }
 
 // 分析结果上下文类型
@@ -186,6 +209,7 @@ export interface AnalysisResult {
   simulatorName?: string
   rawSimulator?: RawSimulator[]  // 原始仿真机信息
   unsatisfied?: UnsatisfiedRequirement[]  // 未满足的需求
+  simPickList?: SimulatorPickList[]  // 仿真机候选列表
 }
 
 // 通道类型名称映射
@@ -229,5 +253,27 @@ export function getMatchColor(score: number): string {
   if (percentage >= 95) return "bg-green-500/10 text-green-700 border-green-500/20"
   if (percentage >= 85) return "bg-blue-500/10 text-blue-700 border-blue-500/20"
   return "bg-yellow-500/10 text-yellow-700 border-yellow-500/20"
+}
+
+// 仿真机需求类型映射
+export const SIMULATOR_REQUIREMENT_TYPES: Record<string, string> = {
+  cpu: "CPU配置",
+  hard_disk: "硬盘配置",
+  memory: "内存配置",
+  slots: "IO插槽配置",
+}
+
+// 辅助函数：根据 SimulatorDetail 判断需求类型
+export function getSimulatorRequirementType(detail: SimulatorDetail): string | null {
+  if (detail.cpu) return "cpu"
+  if (detail.hard_disk) return "hard_disk"
+  if (detail.memory) return "memory"
+  if (detail.slots) return "slots"
+  return null
+}
+
+// 辅助函数：获取仿真机需求类型的友好名称
+export function getSimulatorRequirementTypeName(type: string): string {
+  return SIMULATOR_REQUIREMENT_TYPES[type] || type
 }
 

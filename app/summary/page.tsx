@@ -73,8 +73,10 @@ export default function SummaryPage() {
   const diskDetail = simulatorDetails.find((d) => d.category === "Hard Disk")
   const slotsDetail = simulatorDetails.find((d) => d.category === "Slots")
 
-  // 仿真机名称（可以从context或配置中获取）
-  const simulatorName = analysisResult.simulatorName || "Links-Box-04-S5"
+  // 从 raw_sim 获取仿真机名称和价格
+  const rawSimulator = analysisResult.rawSimulator?.[0]
+  const simulatorName = rawSimulator?.model || analysisResult.simulatorName || "未知型号"
+  const simulatorCost = rawSimulator?.price_cny || 0
 
   // 提取板卡优化方案
   const cardData = analysisResult.cards.Body
@@ -98,9 +100,7 @@ export default function SummaryPage() {
     }
   })
 
-  // 假设仿真机成本（从真实数据中可能需要从其他地方获取）
-  const simulatorCost = 80000 // 这个可以从后端返回或配置
-
+  // 计算项目总成本
   const totalCost = simulatorCost + totalCardCost
 
   return (
