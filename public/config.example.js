@@ -5,7 +5,9 @@ window.__APP_CONFIG__ = {
   // ==================== API 配置 ====================
   
   // 后端 API 地址
-  API_URL: "https://demo.langcore.cn",
+  // 留空 "" 表示使用相对路径 /api，通过 Next.js 代理转发（推荐，可避免 CORS 问题）
+  // 或直接填写完整 URL，如 "https://demo.langcore.cn"
+  API_URL: "",
   
   // API Token
   API_TOKEN: "your_api_token_here",

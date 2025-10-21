@@ -109,6 +109,15 @@ export default function UploadPage() {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-foreground mb-4 text-balance">智能选型系统</h1>
           <p className="text-lg text-muted-foreground">上传需求文档，自动匹配最优仿真机和板卡方案</p>
+          <div className="mt-4">
+            <Button
+              variant="outline"
+              onClick={() => router.push('/debug_workflow')}
+              className="text-sm"
+            >
+              调试工具
+            </Button>
+          </div>
         </div>
 
         <Card className="p-8 border-2">

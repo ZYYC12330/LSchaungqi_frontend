@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: '智能选型系统',
   description: '仿真机和板卡智能选型系统',
   generator: 'v0.app',
+  icons: {
+    icon: '/LOGO.png',
+    shortcut: '/LOGO.png',
+    apple: '/LOGO.png',
+  },
 }
 
 export default function RootLayout({

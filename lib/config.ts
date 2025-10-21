@@ -46,7 +46,7 @@ function getConfig<K extends keyof AppConfig>(
 // 导出配置
 export const config = {
   get API_URL(): string {
-    return getConfig("API_URL", "https://demo.langcore.cn") as string
+    return getConfig("API_URL", "") as string
   },
 
   get API_TOKEN(): string {
