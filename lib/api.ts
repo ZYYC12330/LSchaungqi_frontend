@@ -52,6 +52,16 @@ export async function uploadFile(file: File): Promise<string> {
     
     formData.append("file", encodedFile)
 
+    // 打印调试信息
+    console.log("📤 上传文件:", {
+      原始文件名: file.name,
+      编码文件名: encodedFilename,
+      文件大小: `${(file.size / 1024 / 1024).toFixed(2)} MB`,
+      文件类型: file.type,
+      API地址: `${API_URL}/api/file`,
+      Token: API_TOKEN ? `${API_TOKEN.substring(0, 10)}...` : "未设置"
+    })
+
     const response = await fetch(`${API_URL}/api/file`, {
       method: "POST",
       headers: {
@@ -60,13 +70,35 @@ export async function uploadFile(file: File): Promise<string> {
       body: formData,
     })
 
+    console.log("📥 响应状态:", response.status, response.statusText)
+
     if (!response.ok) {
-      throw new APIError(`文件上传失败: ${response.statusText}`, response.status)
+      // 尝试读取错误响应体
+      let errorMessage = response.statusText
+      try {
+        const errorData = await response.json()
+        errorMessage = errorData.message || errorData.error || JSON.stringify(errorData)
+        console.error("❌ 服务器返回错误:", errorData)
+      } catch {
+        // 如果不是 JSON 格式，尝试读取文本
+        try {
+          const errorText = await response.text()
+          if (errorText) {
+            errorMessage = errorText
+            console.error("❌ 服务器返回错误文本:", errorText)
+          }
+        } catch {
+          // 忽略
+        }
+      }
+      throw new APIError(`文件上传失败 (状态码 ${response.status}): ${errorMessage}`, response.status)
     }
 
     const data: FileUploadResponse = await response.json()
+    console.log("✅ 上传成功，响应数据:", data)
 
     if (data.status !== "success" || !data.data?.fileId) {
+      console.error("❌ 响应格式错误:", data)
       throw new APIError("文件上传响应格式错误", response.status, data)
     }
 
@@ -75,6 +107,14 @@ export async function uploadFile(file: File): Promise<string> {
     if (error instanceof APIError) {
       throw error
     }
+    
+    // 提供更详细的错误信息
+    console.error("❌ 文件上传异常:", error)
+    
+    if (error instanceof TypeError && error.message.includes("fetch")) {
+      throw new APIError(`网络连接失败: 无法连接到 ${API_URL}，请检查：\n1. API地址是否正确\n2. 网络连接是否正常\n3. 服务器是否在运行`)
+    }
+    
     throw new APIError(`文件上传失败: ${error instanceof Error ? error.message : "未知错误"}`)
   }
 }
